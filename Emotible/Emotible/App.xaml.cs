@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Emotible.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Emotible
 {
@@ -30,6 +32,11 @@ namespace Emotible
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using (var emoteDatabase = new EmotibleDataContext())
+            {
+                emoteDatabase.Database.Migrate();
+            }
         }
 
         /// <summary>

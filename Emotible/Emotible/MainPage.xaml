@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:Emotible.ViewModels"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="MainPage_OnLoaded">
     
     <Page.Resources>
         <viewmodels:EmoteListViewModel x:Key="Emotes" x:Name="Emotes"></viewmodels:EmoteListViewModel>
@@ -17,10 +18,7 @@
                       Margin="12">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Content}"
-                            HorizontalAlignment="Stretch"
-                            Command="{Binding OnClick}"
-                            CommandParameter="{Binding Content}"></Button>
+                    <local:EmoteTileControl Text="{Binding Content}" Command="{Binding OnClick}"></local:EmoteTileControl>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

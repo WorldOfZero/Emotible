@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace Emotible.Commands
 {
@@ -16,7 +17,13 @@ namespace Emotible.Commands
 
         public void Execute(object parameter)
         {
-            float pi = 3.14f;
+            string content = parameter as string;
+            if (content != null)
+            {
+                DataPackage clipContents = new DataPackage();
+                clipContents.SetText(content);
+                Clipboard.SetContent(clipContents);
+            }
         }
 
         public event EventHandler CanExecuteChanged;
