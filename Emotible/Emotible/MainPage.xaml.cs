@@ -12,7 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Emotible.Commands;
 using Emotible.Controller;
+using Emotible.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -32,6 +34,19 @@ namespace Emotible
         {
             DataAccessController dal = new DataAccessController();
             var emote = dal.AddEmote();
+
+            hamburger.OptionsItemsSource = new List<MenuItemViewModel>()
+            {
+                new MenuItemViewModel() { Icon = Symbol.Add, Name = "New Emoticon" },
+                new MenuItemViewModel() { Icon = Symbol.Help, Name = "Help and About" },
+            };
+
+            CopyTextCommand.TextCopied += (obj, text) =>
+            {
+                var textCopied = new TextCopiedConfirmationControl();
+                textCopied.Text = text;
+                applicationFrame.Children.Add(textCopied);
+            };
         }
     }
 }

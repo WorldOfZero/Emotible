@@ -5,22 +5,51 @@
     xmlns:local="using:Emotible"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:viewmodels="using:Emotible.ViewModels"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     Loaded="MainPage_OnLoaded">
-    
+
     <Page.Resources>
         <viewmodels:EmoteListViewModel x:Key="Emotes" x:Name="Emotes"></viewmodels:EmoteListViewModel>
+
+        <DataTemplate x:Key="OptionTemplate" x:DataType="viewmodels:MenuItemViewModel">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Grid.Column="0" Symbol="{x:Bind Icon, Mode=OneWay}" Foreground="White" />
+                <TextBlock Grid.Column="1" Text="{x:Bind Name, Mode=OneWay}" FontSize="16" VerticalAlignment="Center" Foreground="White" />
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ItemsControl DataContext="{StaticResource Emotes}" ItemsSource="{Binding EmotesList}"
-                      Margin="12">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:EmoteTileControl Text="{Binding Content}" Command="{Binding OnClick}"></local:EmoteTileControl>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <Grid x:Name="applicationFrame" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <controls:HamburgerMenu x:Name="hamburger"
+                                PaneBackground="Black"
+                                DisplayMode="CompactInline"
+                                OpenPaneLength="240"
+                                CompactPaneLength="48"
+                                Foreground="White"
+                                OptionsItemTemplate="{StaticResource OptionTemplate}">
+
+            <controls:AdaptiveGridView DesiredWidth="200" ItemHeight="{StaticResource TileHeight}" DataContext="{StaticResource Emotes}" ItemsSource="{Binding EmotesList}"
+                                Margin="6,6">
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate>
+                        <local:EmoteTileControl Text="{Binding Content}"
+                                                    Command="{Binding OnClick}"
+                                                    Margin="6,6"
+                                                    Height="{StaticResource TileHeight}">
+                        </local:EmoteTileControl>
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+            </controls:AdaptiveGridView>
+        </controls:HamburgerMenu>
+
     </Grid>
 </Page>

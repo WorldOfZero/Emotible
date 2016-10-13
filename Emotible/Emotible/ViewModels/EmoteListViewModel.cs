@@ -18,8 +18,11 @@ namespace Emotible.ViewModels
         public EmoteListViewModel()
         {
             emotesList = new ObservableCollection<EmoteViewModel>();
-            emotesList.Add(new EmoteViewModel() { Content = "Hello", OnClick = new CopyTextCommand() });
-            emotesList.Add(new EmoteViewModel() { Content = "World", OnClick = new CopyTextCommand() });
+            for (int i = 0; i < 10; ++i)
+            {
+                emotesList.Add(new EmoteViewModel() {Content = "Hello" + i, OnClick = new CopyTextCommand()});
+                emotesList.Add(new EmoteViewModel() {Content = "World" + i, OnClick = new CopyTextCommand()});
+            }
         }
     }
 }

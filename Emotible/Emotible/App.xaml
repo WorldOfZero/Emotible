@@ -4,5 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Emotible"
     RequestedTheme="Light">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <x:Double x:Key="TileHeight">60</x:Double>
+            <SolidColorBrush x:Key="EmotibleButtonPointerOverBrush" Color="#787878"></SolidColorBrush>
+            <SolidColorBrush x:Key="EmotibleButtonPressedBrush" Color="#333333"></SolidColorBrush>
+        </ResourceDictionary>
+    </Application.Resources>
 
 </Application>

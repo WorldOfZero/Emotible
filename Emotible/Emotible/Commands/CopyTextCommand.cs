@@ -10,6 +10,8 @@ namespace Emotible.Commands
 {
     public class CopyTextCommand : ICommand
     {
+        public static event EventHandler<String> TextCopied;
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -23,6 +25,8 @@ namespace Emotible.Commands
                 DataPackage clipContents = new DataPackage();
                 clipContents.SetText(content);
                 Clipboard.SetContent(clipContents);
+
+                TextCopied?.Invoke(this, content);
             }
         }
 
