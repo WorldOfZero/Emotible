@@ -92,13 +92,14 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="EmotibleSeed.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BluePanel.cs" />
+    <Compile Include="BlurPanel.cs" />
     <Compile Include="Commands\CopyTextCommand.cs" />
     <Compile Include="Controller\DataAccessController.cs" />
     <Compile Include="EmoteTileControl.xaml.cs">
